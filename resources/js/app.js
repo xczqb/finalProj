@@ -6,7 +6,6 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createApp, h } from 'vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
-import MerchantLayout from './Layouts/MerchantLayout.vue';
 import UserLayout from './Layouts/UserLayout.vue';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';

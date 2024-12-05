@@ -44,9 +44,9 @@ return [
             'driver' => 'session',
             'provider' => 'users', // Use the 'users' provider
         ],
-        'merchant' => [
+        'company' => [
             'driver' => 'session',
-            'provider' => 'merchants',
+            'provider' => 'companies',
         ],
       
     ],
@@ -73,11 +73,11 @@ return [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
-        'merchants' => [
+        'company' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\Merchant::class),
-        ]
-
+            'model' => env('AUTH_MODEL', App\Models\Company::class),
+        ],
+       
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserRegisterController extends Controller
 {
+    
     public function register()
     {
         return Inertia::render('Users/Register'); // Adjust path if needed

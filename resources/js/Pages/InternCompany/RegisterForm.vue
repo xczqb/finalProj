@@ -15,15 +15,15 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
 const form = useForm({
-    business_name: "",
+    company_name: "",
     owner_name: "",
     email: "",
     phone: "",
-    business_type: "",
+    company_type: "",
     province: "",
     city: "",
     description: "",
-    business_registration: null,
+    company_registration: null,
     owner_id: null,
     password: "",
     password_confirmation: "",
@@ -73,7 +73,7 @@ const submit = () => {
     return;  // Stop submission
   }
   
-  form.post(route('merchant.register'), {
+  form.post(route('company.register.submit'), {
   onFinish: () => form.reset('password', 'password_confirmation'),
   onError: (errors) => {
     console.log("Form Errors:", errors);  // Log the full error response
@@ -103,12 +103,12 @@ fetchProvinces(); // Fetch provinces on component mount
   <div class="form-section">
     <h2>Basic Information</h2>
     <div class="form-group">
-      <label>Business Name (required):</label>
-      <input v-model="form.business_name" type="text" placeholder="Enter the official name of your business" required />
+      <label>Company Name (required):</label>
+      <input v-model="form.company_name" type="text" placeholder="Enter the official name of your company" required />
     </div>
     <div class="form-group">
       <label>Owner's Full Name (required):</label>
-      <input v-model="form.owner_name" type="text" placeholder="Enter your full name as the business owner or representative" required />
+      <input v-model="form.owner_name" type="text" placeholder="Enter your full name as the companuy owner or representative" required />
     </div>
     <div class="form-group">
       <label>Email Address (required):</label>
@@ -122,14 +122,14 @@ fetchProvinces(); // Fetch provinces on component mount
 
   <!-- Business Details Section -->
   <div class="form-section">
-    <h2>Business Details</h2>
+    <h2>Company Details</h2>
     <div class="form-group">
-      <label>Business Type (required):</label>
-      <select v-model="form.business_type" required>
-        <option value="" disabled>Select business type</option>
-        <option>Hotel</option>
-        <option>Resort</option>
-        <option>Tourist Spot</option>
+      <label>Select Your Industry (required):</label>
+      <select v-model="form.company_type" required>
+        <option value="" disabled>Select Industry</option>
+        <option>Technology</option>
+        <option>Healthcare</option>
+        <option>Education</option>
       </select>
     </div>
     <div class="form-group">
@@ -151,7 +151,7 @@ fetchProvinces(); // Fetch provinces on component mount
       </select>
     </div>
     <div class="form-group">
-      <label>Business Description (optional):</label>
+      <label>Specific Address (required):</label>
       <textarea v-model="form.description" maxlength="300" placeholder="Maximum of 300 characters"></textarea>
     </div>
   </div>
@@ -160,8 +160,8 @@ fetchProvinces(); // Fetch provinces on component mount
   <div class="form-section">
     <h2>Upload Documents</h2>
     <div class="form-group">
-      <label>Business Registration (required):</label>
-      <input type="file" @change="handleFileUpload('business_registration', $event)" required />
+      <label>Company Registration (required):</label>
+      <input type="file" @change="handleFileUpload('company_registration', $event)" required />
     </div>
     <div class="form-group">
       <label>Valid ID of Owner/Representative (required):</label>
@@ -334,4 +334,3 @@ input[type="file"]:hover {
 }
 
 </style>
-

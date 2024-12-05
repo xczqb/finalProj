@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class MerchantAuthenticateController extends Controller
+class CompanyAuthController extends Controller
 {
-    
-    public function login(Request $request)
+    public function showRegisterForm()
     {
-        return Inertia::render('Merchants/Login'); // Adjust path if needed
+        return inertia('InternCompany/RegisterForm'); // The Vue component for registration
     }
 
     public function store(Request $request)
@@ -23,22 +20,22 @@ class MerchantAuthenticateController extends Controller
         ]);
 
         // Check if the merchant exists
-        $merchant = \App\Models\Merchant::where('email', $request->email)->first();
+        $company = \App\Models\Company::where('email', $request->email)->first();
 
-        if (!$merchant) {
+        if (!$company) {
             return back()->withErrors(['email' => 'The provided email does not match our records.']);
         }
 
         // Check if the account is verified by admin
-        if (!$merchant->is_verified) {
+        if (!$company->is_verified) {
             return back()->withErrors(['email' => 'Your account is pending verification by the admin.']);
         }
 
         // Attempt login
-        if (Auth::guard('merchant')->attempt($request->only('email', 'password'), $request->remember)) {
+        if (Auth::guard('web')->attempt($request->only('email', 'password'), $request->remember)) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('merchant.dashboard'));
+            return redirect()->intended(route('company.dashboard'));
         }
 
         return back()->withErrors(['password' => 'The provided password is incorrect.']);
@@ -51,10 +48,6 @@ class MerchantAuthenticateController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect(route('merchant.home'));
+        return redirect(route('user.home'));
     }
-
-    
-
-
 }

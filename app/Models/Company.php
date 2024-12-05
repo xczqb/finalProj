@@ -1,29 +1,23 @@
 <?php
+
 namespace App\Models;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Merchant extends Authenticatable
+class Company extends Model
 {
-    use HasFactory, Notifiable;
+    protected $table = 'company';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'business_name',
+        'company_name',
         'owner_name',
         'email',
         'phone',
-        'business_type',
+        'company_type',
         'province',
         'city',
         'description',
-        'business_registration',
+        'company_registration',
         'owner_id',
         'password',
         'is_verified',
@@ -35,7 +29,7 @@ class Merchant extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'business_type' => 'array', // Cast business_type to an array for JSON storage
+        'company_type' => 'array', // Cast business_type to an array for JSON storage
     ];
 
     /**
@@ -58,5 +52,4 @@ class Merchant extends Authenticatable
         'updated_at',
     ];
 
-  
 }

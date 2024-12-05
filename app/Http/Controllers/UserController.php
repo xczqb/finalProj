@@ -3,15 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-
-
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-
     // Page to view
 
     public function index()

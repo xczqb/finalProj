@@ -50,9 +50,9 @@ const show = ref(false); // State for controlling dropdown visibility
           >
             <Link
               class="block w-full px-6 py-3 hover:bg-slate-700 text-left"
-              :href="route('user.dashboard')"
+              :href="route('user.settings')"
             >
-              Dashboard
+              Settings
             </Link>
             <Link
                 class="block w-full px-6 py-3 hover:bg-slate-700 text-left"

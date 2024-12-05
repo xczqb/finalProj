@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('merchants', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id(); // Primary key
-            $table->string('business_name'); // Business name
+            $table->string('company_name'); // Business name
             $table->string('owner_name'); // Owner's name
             $table->string('email')->unique(); // Email
             $table->string('phone'); // Phone number
-            $table->string('business_type'); // Business type (e.g., Hotel, Resort)
+            $table->string('company_type'); // Business type (e.g., Hotel, Resort)
             $table->string('province'); // Province (stored as code)
             $table->string('city'); // City (stored as code)
             $table->text('description')->nullable(); // Business description (optional)
-            $table->string('business_registration'); // Path to uploaded business registration file
+            $table->string('company_registration'); // Path to uploaded business registration file
             $table->string('owner_id'); // Path to uploaded owner ID file
             $table->boolean('is_verified')->default(false); // Admin approval flag
             $table->string('password'); // Password
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('merchants');
+        Schema::dropIfExists('companies');
     }
 };
