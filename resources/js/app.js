@@ -1,31 +1,40 @@
-import "./bootstrap";
-import "../css/app.css";
+import '../css/app.css';
+import './bootstrap';
 
-import { createApp, h } from "vue";
-import { createInertiaApp, Head, Link } from "@inertiajs/vue3";
-import { ZiggyVue } from "../../vendor/tightenco/ziggy";
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+import { createApp, h } from 'vue';
+import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
-import Main from "./Layouts/Main.vue";
+import MerchantLayout from './Layouts/MerchantLayout.vue';
+import UserLayout from './Layouts/UserLayout.vue';
+
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
-    title: (title) => `My App ${title}`,
-    resolve: (name) => {
-        const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
-        let page = pages[`./Pages/${name}.vue`];
-        
-        page.default.layout = page.default.layout || Main;
+    title: (title) => `${title} - ${appName}`,
+    resolve: async (name) => {
+        const pages = import.meta.glob('./Pages/**/*.vue');
+        const page = await resolvePageComponent(`./Pages/${name}.vue`, pages);
+
+        // Dynamically assign layout based on the page name
+        if (name.startsWith('Merchants/')) {
+            page.default.layout = page.default.layout || MerchantLayout;
+        } else if (name.startsWith('Users/')) {
+            page.default.layout = page.default.layout || UserLayout;
+        } else {
+            page.default.layout = page.default.layout || null; // No layout by default
+        }
+
         return page;
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
-            .component("Head", Head)
-            .component("Link", Link)
             .mount(el);
     },
     progress: {
-        color: "#fff",
-        showSpinner: true,
+        color: '#4B5563',
     },
 });

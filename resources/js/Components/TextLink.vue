@@ -1,0 +1,11 @@
+<script setup>
+import { Link } from "@inertiajs/vue3"; // Import Inertia's Link component
+
+defineProps({
+    routeName: String,
+    label: String,
+})
+</script>
+<template>
+        <Link :href="route(routeName)" class="text-indigo-500 hover:text-indigo-600 font-medium underline dark:text-indigo-400"> {{ label  }}</Link>
+</template>
